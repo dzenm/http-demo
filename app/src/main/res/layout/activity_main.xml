@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pull解析" />
+
+        <Button
+            android:id="@+id/btnTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SAX解析" />
+
+        <Button
+            android:id="@+id/btnThree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="JSON解析" />
+
+        <Button
+            android:id="@+id/btnFour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GSON解析" />
+
+        <Button
+            android:id="@+id/btnFive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RecyclerView展示快递数据" />
+
+        <Button
+            android:id="@+id/btnSix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="解析HTML" />
+
+        <Button
+            android:id="@+id/btnSever"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="抓取HTML数据" />
+
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,18 @@
+<layout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/showData"
+            android:text="显示快递数据,多点几下才能显示出来,没找到bug在哪"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/showData"
+            android:id="@+id/recyclerView"/>
+    </RelativeLayout>
+</layout>
