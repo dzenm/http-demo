@@ -14,6 +14,7 @@ import java.util.List;
 public class GSONObjects {
 
     private TextView textView;
+
     public void setTextView(TextView textView) {
         this.textView = textView;
     }
@@ -23,12 +24,10 @@ public class GSONObjects {
         List<Weather> weathers = gson.fromJson(gsonData, new TypeToken<List<Weather>>() {
         }.getType());
         for (Weather weather : weathers) {
-            textView.append("\n  getTemp is : " + weather.getTemp());
-            textView.append("\n  getWind_direction is : " + weather.getWind_direction());
-            textView.append("\n  getWind_strength is : " + weather.getWind_strength());
-            textView.append("\n  getHumidity is : " + weather.getHumidity());
-            textView.append("\n  getTime is : " + weather.getTime());
-
+            textView.append("\n  getName is : " + weather.getName());
+            textView.append("\n  getCode is : " + weather.getCode());
+            textView.append("\n  getTemperature is : " + weather.getTemperature());
+            textView.append("\n  getText is : " + weather.getText());
         }
     }
 }

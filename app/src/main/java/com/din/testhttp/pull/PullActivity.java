@@ -49,8 +49,13 @@ public class PullActivity extends AppCompatActivity {
             public void run() {
                 try {
                     //  判断是XML还是HTML解析,然后进入不同的页面解析数据
-                    String temp = tag;
                     //  请求数据,并返回结果
+                    String temp = null;
+                    if (tag.equals("HTML")) {
+                        temp = URLHTML;
+                    } else if (tag.equals("XML")) {
+                        temp = URLXML;
+                    }
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
                             .url(temp)
@@ -58,9 +63,9 @@ public class PullActivity extends AppCompatActivity {
                     Response response = client.newCall(request).execute();
                     String data = response.body().string();
                     //  调用解析数据方法
-                    if (temp.equals("HTML")) {
+                    if (tag.equals("HTML")) {
                         pullToHTML.parsePull(data);
-                    } else if (temp.equals("XML")) {
+                    } else if (tag.equals("XML")) {
                         pullToXML.parsePull(data);
                     }
                 } catch (IOException e) {

@@ -1,4 +1,4 @@
-package com.din.testhttp.jsonobject;
+package com.din.testhttp.json;
 
 import android.app.Activity;
 import android.widget.TextView;

@@ -5,51 +5,47 @@ package com.din.testhttp.gson;
  */
 
 public class Weather {
-    private int resultcode;
-    private String temp;
-    private String wind_direction;
-    private String wind_strength;
-    private String humidity;
-    private String time;
+    private String name;
+    private String text;
+    private int code;
+    private int temperature;
 
-
-    public String getTemp() {
-        return temp;
+    public Weather(String name, String text, int code, int temperature) {
+        this.name = name;
+        this.text = text;
+        this.code = code;
+        this.temperature = temperature;
     }
 
-    public void setTemp(String temp) {
-        this.temp = temp;
+    public String getName() {
+        return name;
     }
 
-    public String getWind_direction() {
-        return wind_direction;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setWind_direction(String wind_direction) {
-        this.wind_direction = wind_direction;
+    public String getText() {
+        return text;
     }
 
-    public String getWind_strength() {
-        return wind_strength;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public void setWind_strength(String wind_strength) {
-        this.wind_strength = wind_strength;
+    public int getCode() {
+        return code;
     }
 
-    public String getHumidity() {
-        return humidity;
+    public void setCode(int code) {
+        this.code = code;
     }
 
-    public void setHumidity(String humidity) {
-        this.humidity = humidity;
+    public int getTemperature() {
+        return temperature;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
     }
 }

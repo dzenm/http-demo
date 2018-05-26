@@ -24,14 +24,17 @@ public class ExpressAdapter extends RecyclerView.Adapter<ExpressAdapter.ViewHold
 
         View view;
         TextView time, context;
-        ;
 
         public ViewHolder(View view) {
-
             super(view);
             this.view = view;
             time = (TextView) view.findViewById(R.id.time);
             context = (TextView) view.findViewById(R.id.context);
+        }
+
+        public void bindData(Express express) {
+            time.setText(express.getTime());
+            context.setText(express.getContext());
         }
     }
 
@@ -53,8 +56,7 @@ public class ExpressAdapter extends RecyclerView.Adapter<ExpressAdapter.ViewHold
     public void onBindViewHolder(ExpressAdapter.ViewHolder holder, int position) {
         ViewHolder vh = (ViewHolder) holder;
         Express express = list.get(position);
-        vh.time.setText(express.getTime());
-        vh.context.setText(express.getContext());
+        vh.bindData(express);
     }
 
     //  获取Item总数

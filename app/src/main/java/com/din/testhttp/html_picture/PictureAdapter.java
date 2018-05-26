@@ -1,4 +1,4 @@
-package com.din.testhttp.html;
+package com.din.testhttp.html_picture;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -57,13 +57,14 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(PictureAdapter.ViewHolder holder, int position) {
+        String tag = null;
         Item item = list.get(position);
         holder.title.setText(item.getTitle());
-        holder.picture.setImageResource(R.drawable.ic_launcher_background);
-        String tag = item.getPicture();
-        holder.picture.setTag(R.id.image_key, tag);
-        if (tag != null) {
+        if (holder.picture.getTag() == null) {
             Glide.with(activity).load(item.getPicture()).into(holder.picture);
+            holder.picture.setTag(R.id.image_key, item.getPicture());
+        } else {
+            Glide.with(activity).load(holder.picture.getTag()).into(holder.picture);
         }
     }
 

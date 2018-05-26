@@ -18,12 +18,12 @@ private void getHTTPConnection(final String tag) {
                             .url(temp)
                             .build();
                     Response response = client.newCall(request).execute();
-                    String data = response.body().string();
+                    String user = response.body().string();
                     //  调用解析数据方法
                     if (temp.equals("HTML")) {
-                        pullToHTML.parsePull(data);
+                        pullToHTML.parsePull(user);
                     } else if (temp.equals("XML")) {
-                        pullToXML.parsePull(data);
+                        pullToXML.parsePull(user);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -466,7 +466,7 @@ public class JSONExpress {
         String context = null;
         try {
             JSONObject jsonObject = new JSONObject(jsonData);
-            JSONArray jsonArray = new JSONArray(jsonObject.getString( "data"));
+            JSONArray jsonArray = new JSONArray(jsonObject.getString( "user"));
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject result = jsonArray.getJSONObject(i);
                 time = result.getString("time");
@@ -535,11 +535,11 @@ public class DataFromJsoup {
         }).start();
     }
 
-    private void showData(final String data, final String url) {
+    private void showData(final String user, final String url) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                textView.setText(data);
+                textView.setText(user);
                 Glide.with(activity).load(url).listener(requestListener).into(imageView);
             }
         });

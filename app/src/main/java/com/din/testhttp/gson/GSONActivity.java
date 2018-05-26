@@ -18,6 +18,8 @@ public class GSONActivity extends AppCompatActivity {
 
     private ActivityShowBinding bind;
     private GSONObjects gsonObjects;
+    private String city;
+    private final String URL = "https://api.seniverse.com/v3/weather/now.json?key=zbzp8471lvyfrz1e&location=" + city + "&language=zh-Hans&unit=c";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +42,7 @@ public class GSONActivity extends AppCompatActivity {
                 try {
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("http://v.juhe.cn/weather/index?format=2&cityname=%E8%8B%8F%E5%B7%9E&key=efb0a5f8bab5b88e696e6e3dbb77570a")
+                            .url(URL)
                             .build();
                     Response response = client.newCall(request).execute();
                     String data = response.body().string();

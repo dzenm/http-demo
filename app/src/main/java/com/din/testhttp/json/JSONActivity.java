@@ -1,8 +1,13 @@
-package com.din.testhttp.jsonobject;
+package com.din.testhttp.json;
 
+import android.Manifest;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,6 +28,9 @@ public class JSONActivity extends AppCompatActivity {
     private JSONExpress jsonExpress;
     private String TAG = null;
     private static final String WEATHER = "http://v.juhe.cn/weather/index?format=2&cityname=%E8%8B%8F%E5%B7%9E&key=efb0a5f8bab5b88e696e6e3dbb77570a";
+//    private static String city = "ganzhou";
+//    private static final String WEATHER = "https://www.apiopen.top/weatherApi?city=" + city;
+
     private static final String EXPRESS = "http://www.kuaidi100.com/query?type=yuantong&postid=11111111111";
     private static String data = null;
 
@@ -71,7 +79,7 @@ public class JSONActivity extends AppCompatActivity {
     private void showDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("选择需要解析的数据").
-                setNegativeButton("天气信息",new DialogInterface.OnClickListener() {
+                setNegativeButton("天气信息", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         TAG = "FIRST";
