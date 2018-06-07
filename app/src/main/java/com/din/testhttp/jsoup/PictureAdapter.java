@@ -1,10 +1,11 @@
-package com.din.testhttp.html_picture;
+package com.din.testhttp.jsoup;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.annotation.GlideOption;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.din.testhttp.util.FileUtil;
 import com.din.testhttp.R;
 
@@ -23,8 +27,33 @@ import java.util.List;
 
 public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ViewHolder> {
 
-    private List<Item> list;
     private Activity activity;
+    private List<Item> initList;
+    private String[] urls;
+
+    public PictureAdapter(Activity activity) {
+        this.activity = activity;
+    }
+
+    public void setInitList(List<Item> initList) {
+        if (initList.isEmpty()) {
+            return;
+        }
+        this.initList = initList;
+        notifyDataSetChanged();
+    }
+
+    public void setCurrentPage(int start, int end) {
+        if (urls == null) {
+            urls = new String[initList.size()];
+        }
+        for (int i = start; i <= end; i++) {
+            if (urls[i] == null) {
+                urls[i] = initList.get(i).getPicture();
+            }
+        }
+        notifyDataSetChanged();
+    }
 
     @Override
     public PictureAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -37,10 +66,8 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ViewHold
                 builder.setTitle("是否保存").setNegativeButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        viewHolder.picture.setDrawingCacheEnabled(true);
-                        Bitmap bitmap = Bitmap.createBitmap(viewHolder.picture.getDrawingCache());
-                        new FileUtil().savePhoto(bitmap, "pictures", viewHolder.title.getText().toString());
-                        viewHolder.picture.setDrawingCacheEnabled(false);
+                        Bitmap bitmap = viewHolder.picture.getDrawingCache();
+                        new FileUtil().savePhoto(bitmap, viewHolder.title.getText().toString());
                         dialog.cancel();
                     }
                 }).setPositiveButton("取消", new DialogInterface.OnClickListener() {
@@ -57,25 +84,18 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(PictureAdapter.ViewHolder holder, int position) {
-        String tag = null;
-        Item item = list.get(position);
+        Item item = initList.get(position);
         holder.title.setText(item.getTitle());
-        if (holder.picture.getTag() == null) {
-            Glide.with(activity).load(item.getPicture()).into(holder.picture);
-            holder.picture.setTag(R.id.image_key, item.getPicture());
-        } else {
-            Glide.with(activity).load(holder.picture.getTag()).into(holder.picture);
-        }
+        RequestOptions options = new RequestOptions();
+        options.placeholder(R.drawable.a).skipMemoryCache(true);
+        Glide.with(activity).setDefaultRequestOptions(options)
+                .load(urls[position])
+                .into(holder.picture);
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
-    }
-
-    public PictureAdapter(Activity activity, List<Item> list) {
-        this.activity = activity;
-        this.list = list;
+        return initList == null ? 0 : initList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

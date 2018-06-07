@@ -26,11 +26,11 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private static final int ITEM_CONTENT = 1;
 
     public int getContentCount() {
-        return list.size();
+        return list.size() == 0 ? 0 : list.size();
     }
 
     public int getHeadCount() {
-        return listHead.size();
+        return listHead.size() == 0 ? 0 : listHead.size();
     }
 
     @Override
@@ -84,8 +84,11 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return getHeadCount() + getContentCount();
     }
 
-    public WeatherAdapter(Context context, List<Weather> list, List<WeatherHead> listHead) {
+    public WeatherAdapter(Context context) {
         this.context = context;
+    }
+
+    public void notifyData(List<Weather> list, List<WeatherHead> listHead) {
         this.list = list;
         this.listHead = listHead;
     }
@@ -114,34 +117,6 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             low = (TextView) itemView.findViewById(R.id.low);
             fengxiang = (TextView) itemView.findViewById(R.id.fengxiang);
             type = (TextView) itemView.findViewById(R.id.type);
-        }
-    }
-
-    // 启动该任务 new Test().execute();
-    class Test extends AsyncTask<Void, Integer, Boolean> {
-
-        @Override
-        protected void onPreExecute() {
-            // 后台任务开始之前调用, 进行界面的初始化操作
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... voids) {
-            // 子线程中运行, 执行具体的耗时任务, 任务结束通过return语句将执行结果返回, 不可以进行UI操作
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            // 参数为后台任务传进来的, 更新进度, doInBackground方法完成之后调用, 进行UI操作
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            // 任务结束调用
-            super.onPostExecute(aBoolean);
         }
     }
 }

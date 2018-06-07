@@ -47,8 +47,8 @@ public class FileUtil {
      *
      * @param bitmap
      */
-    public void savePhoto(Bitmap bitmap, String direct, String photoName) {
-        File file = new File(getFolder(direct), photoName + ".jpg");
+    public void savePhoto(Bitmap bitmap, String photoName) {
+        File file = new File(Environment.getExternalStorageDirectory().getPath(), photoName + ".jpg");
         FileOutputStream out = null;
         try {
             if (!file.isDirectory()) {
@@ -65,13 +65,13 @@ public class FileUtil {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            try {
-                // 关闭流
-                out.flush();
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                // 关闭流
+//                out.flush();
+//                out.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 
@@ -94,7 +94,8 @@ public class FileUtil {
 
 
     /**
-     *  复制文件到SD卡
+     * 复制文件到SD卡
+     *
      * @param DATABASE_NAME 数据库名称
      */
     public void copyDBToSDcrad(String DATABASE_NAME) {
@@ -105,7 +106,8 @@ public class FileUtil {
     }
 
     /**
-     *  复制文件到SD卡
+     * 复制文件到SD卡
+     *
      * @param DATABASE_NAME 数据库名称
      */
     public void copySDcradToDB(String DATABASE_NAME) {
@@ -116,7 +118,8 @@ public class FileUtil {
     }
 
     /**
-     *  复制文件
+     * 复制文件
+     *
      * @param oldPath
      * @param newPath
      */

@@ -1,6 +1,7 @@
 package com.din.testhttp.kotlin
 
 import android.databinding.DataBindingUtil
+import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.din.testhttp.R
@@ -13,7 +14,7 @@ import kotlin.concurrent.thread
 
 class JSONKotlinActivity : AppCompatActivity() {
 
-    private var bind: ActivityJsonkotlinBinding? = null
+    private lateinit var bind: ActivityJsonkotlinBinding
     private var WEATHER = "https://www.apiopen.top/weatherApi?city=%E6%8F%AD%E9%98%B3"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,9 +28,7 @@ class JSONKotlinActivity : AppCompatActivity() {
     fun getRequest() {
         // kotlin创建匿名线程
         var mythread = object : Thread() {
-            override fun run() {
-
-            }
+            override fun run() {}
         }.start()
 
         // Lambda表达式创建线程
@@ -42,25 +41,21 @@ class JSONKotlinActivity : AppCompatActivity() {
         }).start()
 
         // 一般形式创建thread线程
-        val t = Thread({
-
-        })
+        val t = Thread({})
         t.isDaemon = false
         t.name = "Thread"
         t.priority = 3
         t.start()
 
         // kotlin封装的thread线程
-        thread(start = true, isDaemon = false, name = "KotlinThread", priority = 3) {
-
-        }
+        thread(start = true, isDaemon = false, name = "KotlinThread", priority = 3) {}
     }
 
     fun weather(data: String) {
 
-        var ganmao: String? = null
-        var wendu: String? = null
-        var city: String? = null
+        var ganmao: String
+        var wendu: String
+        var city: String
 
         var jsonObject = JSONObject(data)
         var code: String = jsonObject.getString("code")

@@ -8,10 +8,8 @@ import android.view.View;
 
 import com.din.testhttp.databinding.ActivityMainBinding;
 import com.din.testhttp.express.ExpressActivity;
-import com.din.testhttp.gson.GSONActivity;
-import com.din.testhttp.html_picture.HTMLActivity;
 import com.din.testhttp.json.JSONActivity;
-import com.din.testhttp.jsoup.JsoupActivity;
+import com.din.testhttp.jsoup.HTMLActivity;
 import com.din.testhttp.kotlin.JSONKotlinActivity;
 import com.din.testhttp.pull.PullActivity;
 import com.din.testhttp.rxjavahtml.RxJavaActivity;
@@ -25,12 +23,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bind = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        bind.btnFive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
     /**
@@ -51,27 +43,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, JSONActivity.class));
                 break;
             case R.id.btnFour:
-                startActivity(new Intent(MainActivity.this, GSONActivity.class));
-                break;
-            case R.id.btnFive:
                 startActivity(new Intent(MainActivity.this, ExpressActivity.class));
                 break;
-            case R.id.btnSix:
-                startActivity(new Intent(MainActivity.this, JsoupActivity.class));
-                break;
-            case R.id.btnSever:
+            case R.id.btnFive:
                 startActivity(new Intent(MainActivity.this, HTMLActivity.class));
                 break;
-            case R.id.btnEight:
+            case R.id.btnSix:
                 startActivity(new Intent(MainActivity.this, WeatherActivity.class));
                 break;
-            case R.id.btnNine:
+            case R.id.btnSever:
                 startActivity(new Intent(MainActivity.this, JSONKotlinActivity.class));
                 break;
-            case R.id.btnTen:
+            case R.id.btnEight:
                 startActivity(new Intent(MainActivity.this, RxJavaActivity.class));
-                break;
-            case R.id.btnEleven:
                 break;
             default:
                 break;

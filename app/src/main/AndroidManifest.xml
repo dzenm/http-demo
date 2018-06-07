@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/MyAppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,11 +25,8 @@
         <activity android:name=".pull.PullActivity" />
         <activity android:name=".sax.SAXActivity" />
         <activity android:name=".json.JSONActivity" />
-        <activity android:name=".gson.GSONActivity" />
         <activity android:name=".express.ExpressActivity" />
-        <activity android:name=".jsoup.JsoupActivity" />
-        <activity android:name=".html_picture.HTMLActivity" />
-        <activity android:name=".fastjson.FastJsonActivity" />
+        <activity android:name=".jsoup.HTMLActivity" />
         <activity android:name=".weather.WeatherActivity" />
         <activity android:name=".kotlin.KotlinActivity" />
         <activity android:name=".kotlin.JSONKotlinActivity" />
