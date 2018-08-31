@@ -1,51 +1,10 @@
+<br />
 
+##Android XML和JSON解析
 
-* 解析之前需要通过okhttp3与解析的网页建立连接
+<br /><br />
 
-  ​
-
-```
-private void getHTTPConnection(final String tag) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    //  判断是XML还是HTML解析,然后进入不同的页面解析数据
-                    String temp = tag;
-                    //  请求数据,并返回结果
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(temp)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    String user = response.body().string();
-                    //  调用解析数据方法
-                    if (temp.equals("HTML")) {
-                        pullToHTML.parsePull(user);
-                    } else if (temp.equals("XML")) {
-                        pullToXML.parsePull(user);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-```
-
-注：新建一个线程，使用okhttp3连接URL。然后进入Pull解析
-
----
-
-
-
-
-
-
-
-* Pull解析XML
-
-  ​
+## 一、Pull解析XML
 
 ```
 public class PullToXML {
@@ -131,26 +90,13 @@ public class PullToXML {
 }
 ```
 
+<br /><br />
 
-
-注：parsePull方法中传入一个返回的字符串数据，然后根据节点解析。最后通过一个UI线程更新页面的数据
-
----
-
-
-
-
-
-
-
-* SAX解析XML
-
-
+## 二、SAX解析XML，SAX解析必须继承DefaultHandler，然后重写几个方法。
 
 ```
-//  解析xml
     private void SAXToXMLs(final String xmlData) {
-        //  因为是通过TextView显示出来,所以存在更新UI,需要放在UI线程里执行
+        // 通过UI线程更新UI
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -159,7 +105,6 @@ public class PullToXML {
                     SAXParserFactory factory = SAXParserFactory.newInstance();
                     XMLReader xmlReader = factory.newSAXParser().getXMLReader();
                     SAXToXML saxToXML = new SAXToXML();
-                    //  传参
                     saxToXML.setTextView(bind.text);
                     xmlReader.setContentHandler(saxToXML);
                     //  开始解析
@@ -176,9 +121,7 @@ public class PullToXML {
     }
 ```
 
-
-
-注：SAX解析必须继承DefaultHandler，然后重写几个方法。
+<br />
 
 ```Java
 public class SAXToXML extends DefaultHandler {
@@ -234,49 +177,13 @@ public class SAXToXML extends DefaultHandler {
 }
 ```
 
+<br /><br />
 
+## 三、JSON解析json的两个例子
 
+<br />
 
-
-
-
-* JSON解析json的两个例子
-
-  ​
-
-  * 解析天气数据和快递信息
-
-  ```Java
-  private void showDialog() {
-          AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-          alertDialog.setTitle("选择需要解析的数据").
-                  setNegativeButton("天气信息",new DialogInterface.OnClickListener() {
-                      @Override
-                      public void onClick(DialogInterface dialogInterface, int i) {
-                          TAG = "FIRST";
-                          getHTTPConnection();
-                      }
-                  }).
-                  setPositiveButton("快递信息", new DialogInterface.OnClickListener() {
-                      @Override
-                      public void onClick(DialogInterface dialogInterface, int i) {
-                          TAG = "SECOND";
-                          getHTTPConnection();
-                      }
-                  });
-          alertDialog.create().show();
-      }
-  ```
-
-  ​
-
-  ---
-
-
-
-​	1、天气信息
-
-
+### 1、天气信息
 
 ```
 public class JSONWeather {
@@ -445,9 +352,9 @@ public class JSONWeather {
 }
 ```
 
+<br />
 
-
-​	2、快递信息
+### 2、快递信息
 
 ```
 public class JSONExpress {
@@ -490,17 +397,11 @@ public class JSONExpress {
 }
 ```
 
-
-
 ---
 
+<br /><br />
 
-
-
-
-
-
-* jsoup解析html数据
+### 四、jsoup解析html数据
 
 ```
 public class DataFromJsoup {
@@ -560,7 +461,9 @@ public class DataFromJsoup {
 }
 ```
 
-
+<br />
 
 ---
+
+<br /><br />
 
